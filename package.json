@@ -1,7 +1,6 @@
 {
   "name": "spelieve-code-analysis",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,13 +9,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/json-stringify-safe": "^5.0.0",
     "@types/node": "^20.2.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "json-stringify-safe": "^5.0.1",
     "ts-morph": "^18.0.0",
     "ts-node": "^10.9.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayato-kosaka/spelieve-code-analysis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ayato-kosaka/spelieve-code-analysis/issues"
+  },
+  "homepage": "https://github.com/Ayato-kosaka/spelieve-code-analysis#readme",
+  "description": ""
 }
