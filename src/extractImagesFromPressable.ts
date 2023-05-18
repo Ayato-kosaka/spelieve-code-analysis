@@ -5,29 +5,29 @@ import { getRepoFilePathFromAbsolutePath, project } from "./utils";
 project.getSourceFiles().forEach((sourceFile) => {
   sourceFile.forEachDescendant((node) => {
     if (
+      // ノードがJSX要素である
       node.getKind() === SyntaxKind.JsxElement &&
+      // JSXの開始タグがPressableである
       node
         .getFirstChildByKind(SyntaxKind.JsxOpeningElement)
         ?.getFirstChildByKind(SyntaxKind.Identifier)
-        ?.getText() === "Pressable"
-    ) {
-      const imageNodes = node
+        ?.getText() === "Pressable" &&
+      // 子要素にImageコンポーネントがある
+      node
         .getChildrenOfKind(SyntaxKind.JsxSelfClosingElement)
-        ?.filter(
+        ?.some(
           (childNode) =>
             childNode.getFirstChildByKind(SyntaxKind.Identifier)?.getText() ===
             "Image"
-        );
-
-      if (imageNodes.length) {
-        console.log(
-          getRepoFilePathFromAbsolutePath(
-            node.getSourceFile().compilerNode.fileName,
-            node.getStartLineNumber(),
-            node.getEndLineNumber()
-          )
-        );
-      }
+        )
+    ) {
+      console.log(
+        getRepoFilePathFromAbsolutePath(
+          node.getSourceFile().compilerNode.fileName,
+          node.getStartLineNumber(),
+          node.getEndLineNumber()
+        )
+      );
     }
   });
 });

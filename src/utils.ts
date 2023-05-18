@@ -44,7 +44,8 @@ export function getRepoFilePathFromAbsolutePath(
   endLine?: number
 ) {
   return (
-    path.join(repoBaseUrl, getRelativePathFromAbsolutePath(absolutePath)) +
+    repoBaseUrl +
+    getRelativePathFromAbsolutePath(absolutePath) +
     (stratLine ? `#L${stratLine}` : "") +
     (endLine ? `-L${endLine}` : "")
   );
