@@ -38,6 +38,14 @@ export function getRelativePathFromAbsolutePath(absolutePath: string) {
   return path.relative(rootDir, absolutePath);
 }
 
-export function getRepoFilePathFromAbsolutePath(absolutePath: string) {
-  return path.join(repoBaseUrl, getRelativePathFromAbsolutePath(absolutePath));
+export function getRepoFilePathFromAbsolutePath(
+  absolutePath: string,
+  stratLine?: number,
+  endLine?: number
+) {
+  return (
+    path.join(repoBaseUrl, getRelativePathFromAbsolutePath(absolutePath)) +
+    (stratLine ? `#L${stratLine}` : "") +
+    (endLine ? `-L${endLine}` : "")
+  );
 }
