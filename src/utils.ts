@@ -26,7 +26,7 @@ function safeStringify(obj: any): string {
 // Nodeをファイルに書き出す
 export function writeNode(node: Node, file_suffix_variable?: string) {
   const filename =
-    "logs/extracted_node" +
+    "./logs/extracted_node" +
     (file_suffix_variable ? "_" + file_suffix_variable : "") +
     ".json";
   const safeJson = safeStringify(node.compilerNode);
