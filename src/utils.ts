@@ -2,6 +2,7 @@ import { Project, Node } from "ts-morph";
 import * as fs from "fs";
 import * as path from "path";
 import { repoBaseUrl, rootDir } from "./config";
+import * as child_process from "child_process";
 
 // ts-morphのProjectインスタンスを作成
 export const project = new Project({
@@ -45,8 +46,36 @@ export function getRepoFilePathFromAbsolutePath(
 ) {
   return (
     repoBaseUrl +
+    `blob/${getMemoizedCommitSha()}/` +
     getRelativePathFromAbsolutePath(absolutePath) +
     (stratLine ? `#L${stratLine}` : "") +
     (endLine ? `-L${endLine}` : "")
   );
+}
+
+let memoizedCommitSha: string | null = null;
+function getMemoizedCommitSha(): string {
+  if (!memoizedCommitSha) {
+    memoizedCommitSha = getLatestCommitSha();
+  }
+  return memoizedCommitSha;
+}
+
+function getLatestCommitSha(): string {
+  const command = "git rev-parse HEAD";
+  const options = {
+    cwd: rootDir, // set the current working directory to your repository path
+    encoding: "utf-8" as BufferEncoding,
+  };
+
+  try {
+    const commitSha = child_process
+      .execSync(command, options)
+      .toString()
+      .trim();
+    return commitSha;
+  } catch (error) {
+    console.error("Failed to get the latest commit SHA", error);
+    return "";
+  }
 }
