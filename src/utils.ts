@@ -35,6 +35,12 @@ export function writeNode(node: Node, file_suffix_variable?: string) {
   console.log(`Extracted Node saved to: ${filename}`);
 }
 
+// JSON ファイルを書き出す
+export function distJSON(json: any, fileName?: string) {
+  const filename = "./dist/" + fileName + ".json";
+  fs.writeFileSync(filename, JSON.stringify(json, null, "\t"));
+}
+
 export function getRelativePathFromAbsolutePath(absolutePath: string) {
   return path.relative(rootDir, absolutePath);
 }

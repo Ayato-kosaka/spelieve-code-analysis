@@ -55,3 +55,6 @@ node_modules/
 
 # log files
 logs
+
+# dist files
+dist
