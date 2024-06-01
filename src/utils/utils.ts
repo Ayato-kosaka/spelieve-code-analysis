@@ -1,7 +1,7 @@
 import { Project, Node } from "ts-morph";
 import * as fs from "fs";
 import * as path from "path";
-import { repoBaseUrl, rootDir } from "./config";
+import { repoBaseUrl, rootDir } from "../config";
 import * as child_process from "child_process";
 
 // ts-morphのProjectインスタンスを作成
