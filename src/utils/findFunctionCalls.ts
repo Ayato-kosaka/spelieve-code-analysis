@@ -7,11 +7,11 @@ import { distJSON, getRepoFilePathFromAbsolutePath, project } from "./utils";
  * @param {string} targetFunction - The name of the target function to search for.
  * @param {string} targetModule - The name of the module where the target function is defined.
  */
-const findFunctionCalls = (targetFunction: string, targetModule: string) => {
+export const findFunctionCalls = (targetFunction: string, targetModule: string) => {
   // Check if targetFunction and targetModule are provided
   if (!targetFunction || !targetModule) {
     console.error(
-      "Please provide the targetFunction and targetModule as command-line arguments."
+      "Please provide the targetFunction and targetModule as arguments."
     );
     process.exit(1);
   }
@@ -47,10 +47,3 @@ const findFunctionCalls = (targetFunction: string, targetModule: string) => {
     });
   });
 };
-
-// Get the target function and module from command-line arguments
-const targetFunction = process.argv[2];
-const targetModule = process.argv[3];
-
-// Run the function to find matching function calls
-distJSON(findFunctionCalls(targetFunction, targetModule), "findFunctionCalls");

@@ -1,11 +1,11 @@
 import { SyntaxKind } from "ts-morph";
 import { getRepoFilePathFromAbsolutePath, project } from "./utils";
 
-const findJsxAttribute = (targetAttribute: string) => {
+export const findJsxAttribute = (targetAttribute: string) => {
   // Check if targetAttribute is provided
   if (!targetAttribute) {
     console.error(
-      "Please provide the targetAttribute as a command-line argument."
+      "Please provide the targetAttribute as an argument."
     );
     process.exit(1);
   }
@@ -30,9 +30,3 @@ const findJsxAttribute = (targetAttribute: string) => {
       });
   });
 };
-
-// Get the target attribute from command-line arguments
-const targetAttribute = process.argv[2];
-
-// Run the function to find matching attributes
-findJsxAttribute(targetAttribute);

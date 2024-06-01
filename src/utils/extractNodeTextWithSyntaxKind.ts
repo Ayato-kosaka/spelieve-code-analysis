@@ -5,15 +5,18 @@
  */
 
 import { SyntaxKind } from "ts-morph";
-import { distJSON, getRepoFilePathFromAbsolutePath, project } from "./utils";
+import { getRepoFilePathFromAbsolutePath, project } from "./utils";
 
 
 
 export function extractNodeTextWithSyntaxKind(syntaxKind: SyntaxKind) {
-  console.log(syntaxKind)
-  
+  // 事前処理
+  if (typeof syntaxKind === 'string'){
+    syntaxKind = parseInt(syntaxKind);
+  } 
+
   // Check if syntaxKind exists in enum SyntaxKind
-  if (!Object.values(SyntaxKind).includes(syntaxKind)) {
+  if(!Object.values(SyntaxKind).includes(syntaxKind)) {
     console.error(
       "Property 'syntaxKind' does not exist on type 'SyntaxKind'."
     );
@@ -53,8 +56,3 @@ export function extractNodeTextWithSyntaxKind(syntaxKind: SyntaxKind) {
 
   return nodeTexts;
 }
-
-// Get the target attribute from command-line arguments
-const targetSyntaxKind = process.argv[2];
-
-distJSON(extractNodeTextWithSyntaxKind(parseInt(targetSyntaxKind)), "extractNodeTextWithSyntaxKind");

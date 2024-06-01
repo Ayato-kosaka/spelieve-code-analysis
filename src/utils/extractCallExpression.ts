@@ -1,10 +1,10 @@
 import { SyntaxKind } from "ts-morph";
-import { project, distJSON, getRepoFilePathFromAbsolutePath } from "./utils";
+import { project, getRepoFilePathFromAbsolutePath } from "./utils";
 
 /**
  * Searches for function calls matching a target function in a specified module.
  */
-const extractCallExpression = () => {
+export const extractCallExpression = () => {
   const callExpressions: {
     path: string;
     text: string;
@@ -32,4 +32,3 @@ const extractCallExpression = () => {
   return callExpressions;
 };
 
-distJSON(extractCallExpression(), "extractCallExpression");
