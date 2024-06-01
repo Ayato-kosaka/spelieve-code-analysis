@@ -1,5 +1,5 @@
 import { SyntaxKind } from "ts-morph";
-import { getRepoFilePathFromAbsolutePath, project } from "./utils";
+import { distJSON, getRepoFilePathFromAbsolutePath, project } from "./utils";
 
 /**
  * Searches for function calls matching a target function in a specified module.
@@ -26,7 +26,7 @@ const findFunctionCalls = (targetFunction: string, targetModule: string) => {
       const expression = fc.getExpression();
       // Check if the expression is an identifier and matches the target function
       if (
-        expression.getKind() === SyntaxKind.Identifier &&
+        [SyntaxKind.Identifier, SyntaxKind.PropertyAccessExpression].includes(expression.getKind()) &&
         expression.getText() === targetFunction &&
         // Check if the function call belongs to a declaration in the target module
         expression
@@ -53,4 +53,4 @@ const targetFunction = process.argv[2];
 const targetModule = process.argv[3];
 
 // Run the function to find matching function calls
-findFunctionCalls(targetFunction, targetModule);
+distJSON(findFunctionCalls(targetFunction, targetModule), "findFunctionCalls");
